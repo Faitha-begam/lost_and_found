@@ -1,0 +1,5 @@
+function AuthVisual() {
+  return <aside className="hidden overflow-hidden rounded-3xl bg-ink p-10 text-white lg:flex lg:flex-col lg:justify-between"><div><div className="inline-grid h-11 w-11 place-items-center rounded-xl bg-teal text-lg font-extrabold">R</div><p className="mt-8 text-3xl font-extrabold tracking-tight">Find. Verify. <span className="text-teal-light">Reconnect.</span></p><p className="mt-4 max-w-sm leading-7 text-slate-300">Sign in to report lost items, discover potential matches and track your recovery journey.</p></div><div className="rounded-2xl border border-white/10 bg-white/5 p-5"><p className="text-xs font-bold uppercase tracking-[0.14em] text-teal-light">Your recovery journey</p><div className="mt-5 flex items-center justify-between text-sm font-bold"><span>Report</span><span className="text-teal-light">→</span><span>Match</span><span className="text-teal-light">→</span><span>Verify</span><span className="text-teal-light">→</span><span>Recover</span></div></div></aside>
+}
+
+export default AuthVisual
