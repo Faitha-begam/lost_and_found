@@ -21,7 +21,10 @@
   body {
     min-width: 320px;
     margin: 0;
-    background: var(--color-paper);
+    background:
+      radial-gradient(circle at 8% -8%, rgb(94 234 212 / 0.23), transparent 26rem),
+      radial-gradient(circle at 94% 9%, rgb(147 197 253 / 0.17), transparent 30rem),
+      #f5f8fb;
     color: var(--color-ink);
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -29,4 +32,89 @@
 
   button, input, textarea, select { font: inherit; }
   button { cursor: pointer; }
+  ::selection { background: #b8ece8; color: var(--color-ink); }
+}
+
+@layer components {
+  body::before {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    opacity: 0.45;
+    background-image: linear-gradient(rgb(16 42 67 / 0.028) 1px, transparent 1px), linear-gradient(90deg, rgb(16 42 67 / 0.028) 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: linear-gradient(to bottom, black, transparent 72%);
+    pointer-events: none;
+  }
+
+  header[class*="sticky"] {
+    border-color: rgb(16 42 67 / 0.08);
+    box-shadow: 0 8px 30px rgb(16 42 67 / 0.055);
+  }
+
+  main {
+    background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.48), transparent 28rem);
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  input, textarea, select {
+    border-color: rgb(16 42 67 / 0.14) !important;
+    background-color: rgb(255 255 255 / 0.88) !important;
+    box-shadow: 0 2px 5px rgb(16 42 67 / 0.035);
+    transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--color-teal) !important;
+    box-shadow: 0 0 0 4px rgb(8 126 139 / 0.12), 0 5px 14px rgb(8 126 139 / 0.08);
+  }
+
+  article[class*="bg-white"], form[class*="bg-white"] {
+    border-color: rgb(16 42 67 / 0.09) !important;
+    background: linear-gradient(145deg, rgb(255 255 255 / 0.98), rgb(248 252 252 / 0.93)) !important;
+    box-shadow: 0 12px 32px rgb(16 42 67 / 0.065);
+  }
+
+  article[class*="bg-white"]:hover {
+    border-color: rgb(8 126 139 / 0.24) !important;
+    box-shadow: 0 18px 40px rgb(16 42 67 / 0.10);
+  }
+
+  section[class*="bg-ink"], div[class*="bg-ink"] {
+    box-shadow: 0 18px 40px rgb(16 42 67 / 0.18);
+  }
+
+  [class*="bg-teal-pale"] {
+    background-color: rgb(230 247 246 / 0.8);
+  }
+
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid rgb(8 126 139 / 0.38);
+    outline-offset: 3px;
+  }
+
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  th {
+    letter-spacing: 0.05em;
+  }
+
+  tbody tr {
+    transition: background-color 160ms ease;
+  }
+
+  tbody tr:hover {
+    background-color: rgb(230 247 246 / 0.42);
+  }
 }

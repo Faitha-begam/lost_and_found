@@ -12,7 +12,9 @@ const publicLinks = [
 
 const userLinks = [
   { to: '/dashboard', label: 'Dashboard' },
-  { to: '/browse', label: 'Browse' },
+  { to: '/browse', label: 'Browse Items' },
+  { to: '/report-lost', label: 'Report Lost' },
+  { to: '/smart-match', label: 'SmartMatch' },
   { to: '/my-reports', label: 'My Reports' },
   { to: '/my-claims', label: 'My Claims' },
 ]
@@ -23,7 +25,7 @@ function Navbar({ mode = 'public' }) {
   const links = mode === 'user' ? userLinks : publicLinks
 
   const closeMenu = () => setIsOpen(false)
-  const navLinkClass = ({ isActive }) => `text-sm font-semibold transition-colors hover:text-teal ${isActive ? 'text-teal' : 'text-ink-muted'}`
+  const navLinkClass = ({ isActive }) => `rounded-lg px-2.5 py-2 text-sm font-semibold transition-colors hover:bg-teal-pale hover:text-teal ${isActive ? 'bg-teal-pale text-teal' : 'text-ink-muted'}`
   const logout = () => {
     clearSession()
     setIsOpen(false)
@@ -31,21 +33,21 @@ function Navbar({ mode = 'public' }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-ink/10 bg-paper/95 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-ink/10 bg-paper/90 shadow-sm shadow-ink/5 backdrop-blur">
       <PageContainer className="flex min-h-18 items-center justify-between gap-5 py-3">
         <NavLink to="/" className="flex items-center gap-2.5" onClick={closeMenu} aria-label="ReConnect home">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink text-sm font-extrabold text-white">R</span>
           <span className="text-lg font-extrabold tracking-tight text-ink">Re<span className="text-teal">Connect</span></span>
         </NavLink>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">
           {links.map((link) => link.href
-            ? <a key={link.label} href={link.href} className="text-sm font-semibold text-ink-muted transition-colors hover:text-teal">{link.label}</a>
+            ? <a key={link.label} href={link.href} className="rounded-lg px-2.5 py-2 text-sm font-semibold text-ink-muted transition-colors hover:bg-teal-pale hover:text-teal">{link.label}</a>
             : <NavLink key={link.label} to={link.to} className={navLinkClass}>{link.label}</NavLink>)}
         </nav>
 
-        <div className="hidden md:block">
-          {mode === 'public' ? <Button to="/login">Login</Button> : <Button variant="outline" onClick={logout}>Logout</Button>}
+        <div className="hidden items-center gap-4 md:flex">
+          {mode === 'public' ? <><NavLink to="/admin/login" className="text-xs font-bold text-ink-muted transition-colors hover:text-teal">Admin Login</NavLink><Button to="/login">Login</Button></> : <><NavLink to="/admin/login" className="text-xs font-bold text-ink-muted transition-colors hover:text-teal">Admin Login</NavLink><Button variant="outline" onClick={logout}>Logout</Button></>}
         </div>
 
         <button type="button" onClick={() => setIsOpen((open) => !open)} className="rounded-lg p-2 text-ink md:hidden" aria-expanded={isOpen} aria-controls="mobile-navigation" aria-label="Toggle navigation">
@@ -61,7 +63,7 @@ function Navbar({ mode = 'public' }) {
             {links.map((link) => link.href
               ? <a key={link.label} href={link.href} className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink-muted hover:text-teal" onClick={closeMenu}>{link.label}</a>
               : <NavLink key={link.label} to={link.to} className={`${navLinkClass} rounded-lg px-3 py-2.5`} onClick={closeMenu}>{link.label}</NavLink>)}
-            {mode === 'public' ? <Button to="/login" className="mt-2" onClick={closeMenu}>Login</Button> : <Button className="mt-2" variant="outline" onClick={logout}>Logout</Button>}
+            {mode === 'public' ? <><NavLink to="/admin/login" className="mt-2 rounded-lg px-3 py-2.5 text-sm font-semibold text-ink-muted hover:text-teal" onClick={closeMenu}>Admin Login</NavLink><Button to="/login" onClick={closeMenu}>Login</Button></> : <><NavLink to="/admin/login" className="mt-2 rounded-lg px-3 py-2.5 text-sm font-semibold text-ink-muted hover:text-teal" onClick={closeMenu}>Admin Login</NavLink><Button variant="outline" onClick={logout}>Logout</Button></>}
           </div>
         </nav>
       )}

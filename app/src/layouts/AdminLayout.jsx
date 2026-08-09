@@ -3,8 +3,8 @@ import PageContainer from '../components/common/PageContainer.jsx'
 import { clearAdminSession } from '../utils/storage.js'
 
 const adminLinks = [
-  { to: '/admin', label: 'Overview', end: true },
-  { to: '/admin/reports', label: 'Reports' },
+  { to: '/admin', label: 'Dashboard', end: true },
+  { to: '/admin/reports', label: 'Items' },
   { to: '/admin/claims', label: 'Claims' },
   { to: '/admin/recovery', label: 'Recovery' },
 ]

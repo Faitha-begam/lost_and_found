@@ -16,13 +16,14 @@ function ItemReportForm({ type }) {
 
   function submit(event) {
     event.preventDefault()
+    if (isSaving) return
     if (Object.values(form).some((value) => !value.trim())) {
       setError('Please complete every field, including the private identifying detail.')
       return
     }
     setError('')
     setIsSaving(true)
-    const item = { ...form, id: `item-${Date.now()}`, type, status: type === 'Lost' ? 'Searching' : 'Found', reportedBy: getSession()?.id || 'user-001' }
+    const item = { ...form, id: `item-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, type, status: type === 'Lost' ? 'Searching' : 'Found', reportedBy: getSession()?.id || 'user-001' }
     saveItem(item)
     window.setTimeout(() => navigate('/smart-match', { state: { itemId: item.id } }), 650)
   }
